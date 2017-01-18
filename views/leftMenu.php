@@ -5,7 +5,7 @@
 
 
             ?>
-            <li>
+            <li >
                 <a href="?<?php echo $menu_left_item['chpy']?>">
                      <span>
                         <img src="<?php echo $menu_left_item['img']?>" alt="">

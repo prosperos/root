@@ -12,7 +12,7 @@
 
 
                 ?>
-                <li>
+                <li class="active">
                     <a href="?<?php echo $manu_item['chpy_struct'];?>"><?php echo $manu_item['title'];?></a>
                 </li>
                 <?php
@@ -29,6 +29,9 @@
                 <input type="text" name="search" id="find" placeholder="Введіть текст для пошуку">
                 <button>send</button>
             </form>
+        </div>
+        <div class="right_profile">
+
         </div>
     </div>
 </header>

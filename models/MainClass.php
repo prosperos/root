@@ -30,7 +30,7 @@ class MainClass{
     }
     function categoruArticle($myId){
 
-        $catArticle = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE parent = $myId");
+        $catArticle = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE parent = '$myId'");
         //var_dump($catArticle);
         return $catArticle;
     }

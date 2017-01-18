@@ -16,7 +16,13 @@ a{
     list-style: none;
     width: 140px;
     text-align: center;
+    margin-left: -6px;
 }
+
+#top li.active{
+    background: rosybrown;
+}
+
 #top li a {
     text-decoration: none;
     display: block;
