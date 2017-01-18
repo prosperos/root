@@ -44,3 +44,6 @@ a{
     list-style: none;
 
 }
+.article{
+    display: inline-block;
+}

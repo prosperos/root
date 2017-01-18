@@ -35,13 +35,9 @@ class MainClass{
         return $catArticle;
     }
 
-    function categoruId($chpy){
-        var_dump($chpy);
-        $catId = mysqli_query($this->conn, "SELECT * FROM `categories` WHERE `chpy`= '$chpy'");
-
-        var_dump($catId);
+    function categoruId($slug){
+        $catId = mysqli_query($this->conn, "SELECT * FROM `categories` WHERE `slug`= '$slug'");
         $id = mysqli_fetch_assoc($catId);
-
         $myId = $id['id'];
         return $myId;
 

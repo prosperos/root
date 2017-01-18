@@ -1,17 +1,17 @@
 <?php
 
 require 'models/MainClass.php';
-$chpu = $_SERVER['QUERY_STRING'];
-echo $chpu;
+$slug = $_SERVER['QUERY_STRING'];
+
 $main = new MainClass();
 $my_menu = $main->showMenu();
 $content = 'main';
 $my_left_menu = $main->showLeftMenu();
 
 
-if (!empty($chpu)){
+if (!empty($slug)){
     echo 'Другие страници';
-    $id = $main->categoruId($chpu);//іd категорії
+    $id = $main->categoruId($slug);//іd категорії
     $main_content = $main->categoruArticle($id);
 }else{
     echo 'Головна';

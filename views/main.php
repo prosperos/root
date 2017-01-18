@@ -6,8 +6,8 @@
 
         ?>
         <div class="time"> </div>
-        <h2 class="block_title"><?php var_dump($list_my_articles);?></h2>
-        <p class="text"></p>
+        <h2 class="block_title"><?php print($list_my_articles['title']);?></h2>
+        <p class="text"><?php print($list_my_articles['content']);?></p>
         <?php
         }
         ?>
