@@ -43,5 +43,12 @@ class MainClass{
 
     }
 
+    function findStractId( $slug ) {
+        $stractId = mysqli_query($this->conn, "SELECT * FROM struct where slug_struct = '$slug'");
+        $strId = mysqli_fetch_assoc($stractId);
+        $contentStract = $strId['content'];
+        var_dump($contentStract);
+        return $contentStract;
+    }
 
 }

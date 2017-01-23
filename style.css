@@ -1,14 +1,22 @@
 body{
-    margin: 0;
+    margin: 0 auto;
 }
 a{
     text-decoration: none;
 }
+ul{
+    padding: 0;
+}
+header{
+    width: 100%;
+}
 #top{
     background-color: black;
+    width: 100%;
 }
 .top_menu{
-    margin-left: 400px;
+    width: 1000px;
+    margin: 0 auto;
 }
 
 #top li{
@@ -19,8 +27,9 @@ a{
     margin-left: -6px;
 }
 
-#top li.active{
+#top li.active a{
     background: rosybrown;
+
 }
 
 #top li a {
@@ -40,10 +49,26 @@ a{
 .container{
     margin-left: 470px;
 }
+
+main{
+    overflow: hidden;
+    width: 1000px;
+    margin: 0 auto;
+}
+footer{
+    width: 1000px;
+    margin: 0 auto;
+}
+#left_menu{
+    float: left;
+    width: 200px;
+}
 #left_menu li {
     list-style: none;
 
 }
 .article{
-    display: inline-block;
+    float: left;
+    width: 780px;
+    padding: 0 0 0 20px;
 }

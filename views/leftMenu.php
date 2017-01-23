@@ -8,7 +8,7 @@
             <li >
                 <a href="?<?php echo $menu_left_item['slug']?>">
                      <span>
-                        <img src="<?php echo $menu_left_item['img']?>" alt="">
+                        <img src="img/<?php echo $menu_left_item['img']?>" alt="">
                      </span><?php echo $menu_left_item['name'];?>
                 </a>
             </li>
