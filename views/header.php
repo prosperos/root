@@ -5,12 +5,9 @@
 </head>
 <body>
 
-<script src="https://use.fontawesome.com/06a25b54c3.js"></script>
-<i class="fa fa-ravelry" aria-hidden="true"></i>
-<i class="fa fa-picture-o" aria-hidden="true"></i>
-<i class="fa fa-male" aria-hidden="true"></i>
-<i class="fa fa-reply" aria-hidden="true"></i>
-<i class="fa fa-sticky-note-o" aria-hidden="true"></i>
+<!--<script src="https://use.fontawesome.com/06a25b54c3.js"></script>-->
+<!--<i class="fa fa-ravelry" aria-hidden="true"></i>-->
+
 <header>
         <div id="top">
 
@@ -34,7 +31,7 @@
                 <a href=""><img src="img/logo.png" alt=""></a>
             </div>
             <div class="search">
-                <form action="/search">
+                <form action="search" method="post">
                     <input type="text" name="search" id="find" placeholder="Введіть текст для пошуку">
                     <button>send</button>
                 </form>

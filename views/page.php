@@ -4,6 +4,7 @@
         <?php
             echo 'page';
             var_dump($main_content);
+
         ?>
     </div>
 </main>

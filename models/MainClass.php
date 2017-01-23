@@ -47,8 +47,14 @@ class MainClass{
         $stractId = mysqli_query($this->conn, "SELECT * FROM struct where slug_struct = '$slug'");
         $strId = mysqli_fetch_assoc($stractId);
         $contentStract = $strId['content'];
-        var_dump($contentStract);
+
         return $contentStract;
+    }
+
+    function findArticle ($id) {
+        $find_Article = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE id = $id");
+        $find_Id_Article = mysqli_fetch_assoc($find_Article);
+        return $find_Id_Article;
     }
 
 }
