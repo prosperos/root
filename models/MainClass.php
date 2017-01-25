@@ -57,4 +57,10 @@ class MainClass{
         return $find_Id_Article;
     }
 
+    function findArticleSlug($slug){
+        $find_article_slug = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
+        $find_slug = mysqli_fetch_assoc($find_article_slug);
+        return $find_slug;
+    }
+
 }

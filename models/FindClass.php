@@ -17,7 +17,7 @@ class FindClass{
     }
 
     function searchArticles($find_slag) {
-        $search = mysqli_query($this->conn, "SELECT content_full FROM categories_item WHERE content_full LIKE '%$find_slag%'");
+        $search = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE content_full LIKE '%$find_slag%'");
         return $search;
     }
 }

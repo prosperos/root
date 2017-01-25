@@ -31,9 +31,9 @@
                 <a href=""><img src="img/logo.png" alt=""></a>
             </div>
             <div class="search">
-                <form action="search" method="post">
-                    <input type="text" name="search" id="find" placeholder="Введіть текст для пошуку">
-                    <button>send</button>
+                <form action="?search" method="post">
+                    <input type="text" name="words" id="find" placeholder="Введіть текст для пошуку">
+                    <input type="submit" name="bsearch" value="find">
                 </form>
             </div>
             <div class="right_profile">
