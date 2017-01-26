@@ -20,4 +20,9 @@ class FindClass{
         $search = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE content_full LIKE '%$find_slag%'");
         return $search;
     }
+
+    function takeTypeArticle(){
+        $take_type = mysqli_query($this->conn, "SELECT * FROM type_article");
+        return $take_type;
+    }
 }

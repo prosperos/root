@@ -8,11 +8,12 @@ $slug = $_SERVER['QUERY_STRING'];
 
 $act = new ClientClass();// Для вибору активного меню
 $main = new MainClass();
+$FindClass = new FindClass();
 $my_menu = $main->showMenu();
 $content = 'main';
 $my_left_menu = $main->showLeftMenu();
+$type_article = $FindClass->takeTypeArticle();
 
-$FindClass = new FindClass();
 
 
 
@@ -22,11 +23,12 @@ if (!empty($slug)){
 
         if (!empty($id)){
             $main_content = $main->categoruArticle($id);
+            if($slug == 'vse_predmety'){
+                $main_content = $main->showArticles();
+
+            }
         }else{
-
             $my_article = $main->findArticleSlug($slug);
-
-
             if ($slug == ABOUT_US){
                 $content = ABOUT_US;
             }
@@ -42,9 +44,9 @@ if (!empty($slug)){
                 $content = FIND;
                 $find_slag = $_POST['words'];
                 $main_content = $FindClass->searchArticles($find_slag);
-
-
             }
+
+            //else if ( $slug = )
             else{
                 $main_content = $main->findStractId($slug);
                 $content = 'page';
@@ -55,5 +57,6 @@ if (!empty($slug)){
 }else{
     echo 'Головна';
     $main_content = $main->showArticles();
+
 }
 ?>

@@ -72,3 +72,8 @@ footer{
     width: 780px;
     padding: 0 0 0 20px;
 }
+
+.head_filter{
+    overflow: hidden;
+    padding-left: 21px;
+}

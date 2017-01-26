@@ -1,5 +1,24 @@
 <main>
 <?php require 'leftMenu.php';?>
+    <div class="head_filter">
+        <p>Показувати</p>
+        <div class="select_options">
+            <form action="">
+                <select name="type_article" id="">
+                    <?php
+                    while ($type = mysqli_fetch_assoc($type_article)){
+
+
+                        ?>
+                    <option value="<?php echo $type['id'];?>"><?php echo $type['name'];?>
+                       <?php
+                       }
+                        ?>
+                    </option>
+                </select>
+            </form>
+        </div>
+    </div>
     <div class="article">
         <?php
         while ($list_my_articles = mysqli_fetch_assoc($main_content)){
