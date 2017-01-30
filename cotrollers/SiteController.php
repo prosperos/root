@@ -6,6 +6,9 @@ require 'cotrollers/constan.php';
 require 'models/FindClass.php';
 $slug = $_SERVER['QUERY_STRING'];
 
+$route = $_GET['route'];
+$slug = $route;
+
 $act = new ClientClass();// Для вибору активного меню
 $main = new MainClass();
 $FindClass = new FindClass();
@@ -18,7 +21,7 @@ $type_article = $FindClass->takeTypeArticle();
 
 
 if (!empty($slug)){
-    echo 'Другие страници';
+
     $id = $main->categoruId($slug);//іd категорії
 
         if (!empty($id)){
@@ -46,7 +49,29 @@ if (!empty($slug)){
                 $main_content = $FindClass->searchArticles($find_slag);
             }
 
-            //else if ( $slug = )
+            else if ( $slug == 'blog') {
+                $main_content = $main->showArticles();
+            }
+            else if ($slug == 'news'){
+                $main_content = $main->findNewsArticle($slug);
+                $content = 'filter_article';
+                }
+            else if ($slug == 'free_video'){
+                $main_content = $main->findNewsArticle($slug);
+                $content = 'filter_article';
+            }
+            else if ($slug == 'tips'){
+                $main_content = $main->findNewsArticle($slug);
+                $content = 'filter_article';
+            }
+            else if ($slug == 'raznoe'){
+                $main_content = $main->findNewsArticle($slug);
+                $content = 'filter_article';
+            }
+            else if ($slug == '404'){
+                $content = '404';
+            }
+
             else{
                 $main_content = $main->findStractId($slug);
                 $content = 'page';
@@ -55,8 +80,6 @@ if (!empty($slug)){
 
 
 }else{
-    echo 'Головна';
     $main_content = $main->showArticles();
-
 }
 ?>

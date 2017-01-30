@@ -2,6 +2,7 @@
 <head>
     <title>videouroki.net</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -19,7 +20,7 @@
 
                     ?>
                     <li class="<?php echo $active;?>">
-                        <a href="?<?php echo $manu_item['slug_struct'];?>"><?php echo $manu_item['title'];?></a>
+                        <a href="<?php echo $manu_item['slug_struct'];?>"><?php echo $manu_item['title'];?></a>
                     </li>
                     <?php
                 }
@@ -31,7 +32,7 @@
                 <a href=""><img src="img/logo.png" alt=""></a>
             </div>
             <div class="search">
-                <form action="?search" method="post">
+                <form action="search" method="post">
                     <input type="text" name="words" id="find" placeholder="Введіть текст для пошуку">
                     <input type="submit" name="bsearch" value="find">
                 </form>

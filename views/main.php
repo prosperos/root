@@ -4,18 +4,21 @@
         <p>Показувати</p>
         <div class="select_options">
             <form action="">
-                <select name="type_article" id="">
+               <select class="select_type" name="select_type">
                     <?php
                     while ($type = mysqli_fetch_assoc($type_article)){
 
+                        $type_id = $type['id'];
 
                         ?>
-                    <option value="<?php echo $type['id'];?>"><?php echo $type['name'];?>
-                       <?php
-                       }
-                        ?>
+                    <option value="<?php echo $type['parent_categories'];?>">
+                        <?php echo $type['name'];?>
                     </option>
-                </select>
+                        <?php
+                    }
+                    ?>
+               </select>
+
             </form>
         </div>
     </div>
@@ -25,10 +28,18 @@
 
         ?>
         <div class="time"> <?php print date('Y-m-d',strtotime($list_my_articles['time']));?></div>
-        <h2  class="block_title"><a href="?<?php print ($list_my_articles['content_full_slug']);?>" ><?php print($list_my_articles['title']);?></a></h2>
+        <h2  class="block_title"><a href="<?php print ($list_my_articles['content_full_slug']);?>" ><?php print($list_my_articles['title']);?></a></h2>
         <p class="text"><?php print($list_my_articles['content']);?></p>
         <?php
         }
         ?>
     </div>
 </main>
+
+<script>
+    $( ".select_type" ).change(function() {
+        var url = $(this).val();
+        window.location = "http://localhost/new/"+url;
+        //console.log( $(this).val()) );
+    });
+</script>

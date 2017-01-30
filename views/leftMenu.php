@@ -6,7 +6,7 @@
 
             ?>
             <li >
-                <a href="?<?php echo $menu_left_item['slug']?>">
+                <a href="<?php echo $menu_left_item['slug']?>">
                      <span>
                         <img src="img/<?php echo $menu_left_item['img']?>" alt="">
                      </span><?php echo $menu_left_item['name'];?>
