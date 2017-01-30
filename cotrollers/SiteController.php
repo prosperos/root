@@ -73,8 +73,15 @@ if (!empty($slug)){
             }
 
             else{
+
                 $main_content = $main->findStractId($slug);
-                $content = 'page';
+                if (!empty($main_content)){
+                    $content = 'page';
+                }else{
+                    //header(Location: $content = '404');
+                    $content = '404';
+                }
+
             }
         }
 

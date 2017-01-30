@@ -63,7 +63,6 @@ class MainClass{
         return $find_slug;
     }
 
-
     function findNewsArticle($slug){
         $findNews = mysqli_query($this->conn, "SELECT * FROM type_article WHERE parent_categories = '$slug'");
         $findNewsSlug = mysqli_fetch_assoc($findNews);
@@ -71,9 +70,4 @@ class MainClass{
         $find_content_articles = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE con_type_categories = $find_id");
         return $find_content_articles;
     }
-
-//    function found404(){
-//        $found404 = mysqli_query($this->conn, SELECT categories_item.*, struct.*, type_article.*,  FROM categories_item, struct, type_article);
-//    }
-
 }

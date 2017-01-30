@@ -16,7 +16,7 @@
                 <?php
                 while ($manu_item = mysqli_fetch_assoc($my_menu)){
 
-                    $active = $act->activeItem($slug, $manu_item['slug_struct']);// запуск класа для активоного меню
+                    $active = $act->activeItem($slug, $manu_item['slug_struct'], "active");// запуск класа для активоного меню
 
                     ?>
                     <li class="<?php echo $active;?>">

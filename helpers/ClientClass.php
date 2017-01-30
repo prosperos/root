@@ -7,10 +7,11 @@
  */
 class ClientClass{
 
-    function activeItem($slug, $manu_item) {
+    function activeItem($slug, $manu_item, $flag) {
 
         if( $slug == $manu_item ){
-            $active = 'active';
+            $active = $flag;
+
         }else{
             $active = '';
         }
