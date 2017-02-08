@@ -3,7 +3,7 @@
     <div class="article">
         <?php
             echo 'page';
-           
+
 
         ?>
     </div>

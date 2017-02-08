@@ -70,4 +70,35 @@ class MainClass{
         $find_content_articles = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE con_type_categories = $find_id");
         return $find_content_articles;
     }
+
+
+    function countViewsArticle($slug){
+        if (!empty($slug)) {
+            $result = mysqli_query ($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
+            $update = mysqli_query ($this->conn, "UPDATE categories_item SET counter=counter+1 WHERE content_full_slug = '$slug'");
+            $result_query = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
+
+            return $result_query;
+        }
+
+
+
+    }
+
+
+    function pagination($limit, $this_page_first_result){
+        $result = mysqli_query($this->conn, "SELECT id FROM categories_item" );
+        $pages = $result->num_rows / $limit;
+        $pages = ceil($pages);
+
+        $result_query = mysqli_query($this->conn, "SELECT * FROM categories_item ORDER BY id DESC LIMIT $this_page_first_result, $limit");
+        $my_arr = array($pages, $result_query);
+
+
+
+    return $my_arr;
+    }
+
+
+
 }

@@ -17,6 +17,13 @@ $content = 'main';
 $my_left_menu = $main->showLeftMenu();
 $type_article = $FindClass->takeTypeArticle();
 
+$countViews = $act->countViews();
+$lastVisit = $act->lastVisit();
+
+$countViewsArticle = $main->countViewsArticle($slug);
+
+
+$limit = 4;
 
 
 
@@ -29,6 +36,15 @@ if (!empty($slug)){
             if($slug == 'vse_predmety'){
                 $main_content = $main->showArticles();
 
+
+                if (!empty($_GET['start'])){
+                    echo 111;
+                    $pagination = $main->pagination($limit, $_GET['start']);
+                }else{
+                    echo 222;
+                    $pagination = $main->pagination($limit,1);
+                }
+
             }
         }else{
             $my_article = $main->findArticleSlug($slug);
@@ -39,39 +55,26 @@ if (!empty($slug)){
                 $main_content = $my_article;
                 $content = 'article';
             }
-            else if (is_numeric($slug) == true){
-                $main_content = $main->findArticle($slug);
-                $content = 'article';
-            }
+//            else if (is_numeric($slug) == true){
+//                $main_content = $main->findArticle($slug);
+//                $content = 'article';
+//            }
             else if($slug == FIND) {
                 $content = FIND;
                 $find_slag = $_POST['words'];
                 $main_content = $FindClass->searchArticles($find_slag);
             }
 
-            else if ( $slug == 'blog') {
+            else if ( $slug == 'blog'  ) {
                 $main_content = $main->showArticles();
             }
-            else if ($slug == 'news'){
+            else if ($slug == 'news' || $slug == 'free_video' || $slug == 'tips' || $slug == 'raznoe'){
                 $main_content = $main->findNewsArticle($slug);
                 $content = 'filter_article';
                 }
-            else if ($slug == 'free_video'){
-                $main_content = $main->findNewsArticle($slug);
-                $content = 'filter_article';
-            }
-            else if ($slug == 'tips'){
-                $main_content = $main->findNewsArticle($slug);
-                $content = 'filter_article';
-            }
-            else if ($slug == 'raznoe'){
-                $main_content = $main->findNewsArticle($slug);
-                $content = 'filter_article';
-            }
             else if ($slug == '404'){
                 $content = '404';
             }
-
             else{
 
                 $main_content = $main->findStractId($slug);
