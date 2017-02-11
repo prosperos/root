@@ -38,7 +38,16 @@
                 </form>
             </div>
             <div class="right_profile">
+                <?php
 
+                if (!empty($_SESSION['reg'])) {
+                    echo "";
+                }else{
+                ?>
+                <p><a href="registration">Реєстрація</a></p>
+                    <?php
+                }
+                ?>
             </div>
         </div>
 

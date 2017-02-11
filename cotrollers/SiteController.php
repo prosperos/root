@@ -1,5 +1,7 @@
 <?php
-
+session_start();
+//session_destroy();
+//exit;
 require 'models/MainClass.php';
 require 'helpers/ClientClass.php';
 require 'cotrollers/constan.php';
@@ -22,9 +24,7 @@ $lastVisit = $act->lastVisit();
 
 $countViewsArticle = $main->countViewsArticle($slug);
 
-
-$limit = 4;
-
+$limit = 4;//pagination
 
 
 if (!empty($slug)){
@@ -38,10 +38,10 @@ if (!empty($slug)){
 
 
                 if (!empty($_GET['start'])){
-                    echo 111;
+
                     $pagination = $main->pagination($limit, $_GET['start']);
                 }else{
-                    echo 222;
+
                     $pagination = $main->pagination($limit,1);
                 }
 
@@ -74,6 +74,79 @@ if (!empty($slug)){
                 }
             else if ($slug == '404'){
                 $content = '404';
+            }
+            else if($slug == 'registration'){
+
+                $content = 'registration';
+
+                if(!empty($_POST['login']) && !empty($_POST['email']) && !empty($_POST['pass']) && !empty($_POST['pass_repead'])) {
+
+                    if ($_POST['pass'] == $_POST['pass_repead']) {
+
+
+                        $login = $_POST['login'];
+                        $email = $_POST['email'];
+                        $pass = md5($_POST['pass']);
+
+                        $registration = $main->registration($login, $email, $pass);
+                            $_SESSION['reg'] = 1;
+
+                        }else{
+                            header('Location: registration');
+                        }
+                }else{
+                    echo "невірні дані";
+                }
+
+
+            }
+            else if ($slug == 'login'){
+                if (!empty($_POST['login'])&& !empty($_POST['pass'])&& !empty($_POST['email'])) {
+
+                    $content = 'login';
+                    $main_content = $main->loginUser($login, $email);
+                    $login = $_POST['login'];
+                    $pass = $_POST['pass'];
+                    $email = $_POST['email'];
+
+
+                    //$name_arr = mysqli_fetch_assoc($name_data);
+                    if (!empty($name_data->num_rows)) {
+                        $_SESSION['LOGIN_ERROR'] = 0;
+
+                    }else{
+                        $_SESSION['LOGIN_ERROR'] = 1;
+                        header('Location:index.php');
+                    }
+
+
+
+                    if (!empty($email_data->num_rows)) {
+                        $_SESSION['EMAIL_ERROR'] = 0;
+
+                        $pass_tmp = md5($pass);
+
+                        $email_arr = mysqli_fetch_assoc($email_data);
+
+                        if ($pass_tmp == $email_arr['password']) {
+                            $_SESSION['PASS_ERROR'] =  0;
+
+                        }else{
+                            $_SESSION['PASS_ERROR'] = 1;
+                            header('Location:index.php');
+                        }
+
+                    }else{
+                        $_SESSION['EMAIL_ERROR'] = 1;
+                        header('Location:index.php');
+                    }
+
+
+
+
+                }else{
+                    $_SESSION['ERROR_FIELD'] = 1;
+                }
             }
             else{
 

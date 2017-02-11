@@ -77,28 +77,26 @@ class MainClass{
             $result = mysqli_query ($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
             $update = mysqli_query ($this->conn, "UPDATE categories_item SET counter=counter+1 WHERE content_full_slug = '$slug'");
             $result_query = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
-
             return $result_query;
         }
-
-
-
     }
-
-
     function pagination($limit, $this_page_first_result){
         $result = mysqli_query($this->conn, "SELECT id FROM categories_item" );
         $pages = $result->num_rows / $limit;
         $pages = ceil($pages);
-
         $result_query = mysqli_query($this->conn, "SELECT * FROM categories_item ORDER BY id DESC LIMIT $this_page_first_result, $limit");
         $my_arr = array($pages, $result_query);
-
-
-
     return $my_arr;
     }
 
 
+    function registration($login,$email,$pass){
+        $query = mysqli_query($this->conn, "INSERT INTO `users`(`login`, `email`, `password`) VALUES ('$login', '$email', '$pass')" );
+        return $query;
+    }
+    function loginUser(){
+        $name_data = mysqli_query($this->conn, "SELECT name FROM users WHERE name = '$login' AND email = '$email'");
+        return $name_data;
+    }
 
 }

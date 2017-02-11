@@ -4,9 +4,13 @@
         <p>Кількість переглядів
             <?php
             $result_counter = mysqli_fetch_assoc($countViewsArticle);
-            //var_dump($countViewsArticle);
             echo $result_counter['counter'];
-            //echo $countViews;
+            echo "<br>";
+            $ip = $_SERVER["REMOTE_ADDR"];
+            $v = 10;
+            $w = 4;
+            echo (int)$v / (int)$w;
+
             ?></p>
         <p>Останній візит <?php echo $lastVisit;?></p>
     </div>

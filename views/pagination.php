@@ -2,6 +2,7 @@
     <p><a href="<?php echo $slug;?>&start=<?php echo 0;?>"><<</a></p>
 </div>
 <?php
+
 for ($i = 0; $i < $pagination[0]; $i++){
     ?>
     <div>
@@ -22,4 +23,6 @@ while($all_pagination = mysqli_fetch_assoc($pagination[1])){
 <p class="text"><?php print($all_pagination['content']);?></p>
 <?php
 }
+
 ?>
+
