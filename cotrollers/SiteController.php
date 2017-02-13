@@ -54,6 +54,7 @@ if (!empty($slug)){
             else if (!empty($my_article)){
                 $main_content = $my_article;
                 $content = 'article';
+
             }
 //            else if (is_numeric($slug) == true){
 //                $main_content = $main->findArticle($slug);
@@ -76,29 +77,27 @@ if (!empty($slug)){
                 $content = '404';
             }
             else if($slug == 'registration'){
-
                 $content = 'registration';
+            }
+            else if ($slug == 'my_reg'){
+                include 'helpers/hendler.php';
+                if(!empty($login) && !empty($email) && !empty($pass) && !empty($repead_pass)) {
 
-                if(!empty($_POST['login']) && !empty($_POST['email']) && !empty($_POST['pass']) && !empty($_POST['pass_repead'])) {
 
-                    if ($_POST['pass'] == $_POST['pass_repead']) {
+                    if ($pass == $repead_pass) {
 
-
-                        $login = $_POST['login'];
-                        $email = $_POST['email'];
-                        $pass = md5($_POST['pass']);
 
                         $registration = $main->registration($login, $email, $pass);
-                            $_SESSION['reg'] = 1;
+                        $_SESSION['reg'] = 1;
 
-                        }else{
-                            header('Location: registration');
-                        }
+                    }else{
+                        $_SESSION['error_check_pass'] = 1;
+                        header('Location: registration');
+                    }
                 }else{
-                    echo "невірні дані";
+                    $_SESSION['error_enter_data'] = 1;
+                    header('Location: registration');
                 }
-
-
             }
             else if ($slug == 'login'){
                 if (!empty($_POST['login'])&& !empty($_POST['pass'])&& !empty($_POST['email'])) {
