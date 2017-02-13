@@ -36,7 +36,7 @@
     </div>
     <div class="paginate">
         <?php
-        var_dump($pagination);
+        
         include 'pagination.php';
         ?>
     </div>

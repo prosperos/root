@@ -77,3 +77,6 @@ footer{
     overflow: hidden;
     padding-left: 21px;
 }
+.right_profile{
+    display: inline-block;
+}
