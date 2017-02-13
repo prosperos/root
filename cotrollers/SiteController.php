@@ -8,8 +8,13 @@ require 'cotrollers/constan.php';
 require 'models/FindClass.php';
 $slug = $_SERVER['QUERY_STRING'];
 
-$route = $_GET['route'];
+if (!empty($_GET['route'])){
+    $route = $_GET['route'];
+}else{
+    $route = '';
+}
 $slug = $route;
+
 
 $act = new ClientClass();// Для вибору активного меню
 $main = new MainClass();
@@ -24,27 +29,17 @@ $lastVisit = $act->lastVisit();
 
 $countViewsArticle = $main->countViewsArticle($slug);
 
-$limit = 4;//pagination
+$limit = 2;//pagination
 
 
 if (!empty($slug)){
-
     $id = $main->categoruId($slug);//іd категорії
-
+    include 'helpers/pagination.php';
         if (!empty($id)){
             $main_content = $main->categoruArticle($id);
             if($slug == 'vse_predmety'){
                 $main_content = $main->showArticles();
-
-
-                if (!empty($_GET['start'])){
-
-                    $pagination = $main->pagination($limit, $_GET['start']);
-                }else{
-
-                    $pagination = $main->pagination($limit,1);
-                }
-
+                include 'helpers/pagination.php';
             }
         }else{
             $my_article = $main->findArticleSlug($slug);
@@ -54,6 +49,7 @@ if (!empty($slug)){
             else if (!empty($my_article)){
                 $main_content = $my_article;
                 $content = 'article';
+
 
             }
 //            else if (is_numeric($slug) == true){
@@ -66,8 +62,9 @@ if (!empty($slug)){
                 $main_content = $FindClass->searchArticles($find_slag);
             }
 
-            else if ( $slug == 'blog'  ) {
+            else if ( $slug == 'blog' ) {
                 $main_content = $main->showArticles();
+                include 'helpers/pagination.php';
             }
             else if ($slug == 'news' || $slug == 'free_video' || $slug == 'tips' || $slug == 'raznoe'){
                 $main_content = $main->findNewsArticle($slug);
@@ -139,16 +136,11 @@ if (!empty($slug)){
                         $_SESSION['EMAIL_ERROR'] = 1;
                         header('Location:index.php');
                     }
-
-
-
-
                 }else{
                     $_SESSION['ERROR_FIELD'] = 1;
                 }
             }
             else{
-
                 $main_content = $main->findStractId($slug);
                 if (!empty($main_content)){
                     $content = 'page';
@@ -156,12 +148,13 @@ if (!empty($slug)){
                     //header(Location: $content = '404');
                     $content = '404';
                 }
-
             }
         }
 
 
 }else{
     $main_content = $main->showArticles();
+
+    include 'helpers/pagination.php';
 }
 ?>
