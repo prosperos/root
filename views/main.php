@@ -34,12 +34,11 @@
         }
         ?>
     </div>
-    <div class="paginate">
+
         <?php
-        
+
         include 'pagination.php';
         ?>
-    </div>
 </main>
 
 <script>

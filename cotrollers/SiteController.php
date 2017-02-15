@@ -6,6 +6,8 @@ require 'models/MainClass.php';
 require 'helpers/ClientClass.php';
 require 'cotrollers/constan.php';
 require 'models/FindClass.php';
+
+$base_url = 'http://localhost/new/';
 $slug = $_SERVER['QUERY_STRING'];
 
 if (!empty($_GET['route'])){
@@ -79,14 +81,9 @@ if (!empty($slug)){
             else if ($slug == 'my_reg'){
                 include 'helpers/hendler.php';
                 if(!empty($login) && !empty($email) && !empty($pass) && !empty($repead_pass)) {
-
-
                     if ($pass == $repead_pass) {
-
-
                         $registration = $main->registration($login, $email, $pass);
                         $_SESSION['reg'] = 1;
-
                     }else{
                         $_SESSION['error_check_pass'] = 1;
                         header('Location: registration');
@@ -96,50 +93,60 @@ if (!empty($slug)){
                     header('Location: registration');
                 }
             }
-            else if ($slug == 'login'){
-                if (!empty($_POST['login'])&& !empty($_POST['pass'])&& !empty($_POST['email'])) {
-
-                    $content = 'login';
-                    $main_content = $main->loginUser($login, $email);
-                    $login = $_POST['login'];
-                    $pass = $_POST['pass'];
-                    $email = $_POST['email'];
+            else if ($slug == 'login') {
+                $content = 'login';
+            }
 
 
-                    //$name_arr = mysqli_fetch_assoc($name_data);
-                    if (!empty($name_data->num_rows)) {
+            else if ($slug == 'log_in') {
+                include 'helpers/login_user.php';
+                    $login_user = $main->loginUser($email, $pass);
+
+                    if (!empty($login_user->num_rows)) {
                         $_SESSION['LOGIN_ERROR'] = 0;
+                        echo "login ok";
+                        if (!empty($login_user->num_rows)) {
+                            $_SESSION['EMAIL_ERROR'] = 0;
+                            $pass_tmp = md5($pass);
+                            $email_arr = mysqli_fetch_assoc($login_user);
 
+                                if ($pass_tmp == $email_arr['password']) {
+                                    $_SESSION['PASS_ERROR'] =  0;
+                                    $_SESSION['user'] = $email;
+                                    header("Location: $base_url"."lk");
+
+                                }else{
+                                    $_SESSION['PASS_ERROR'] = 1;
+                                    header("Location: $base_url");
+                                    echo 'error_pass';
+                                }
+                        }else{
+                            $_SESSION['EMAIL_ERROR'] = 1;
+                            header("Location: $base_url");
+                            echo 'error_email';
+                        }
                     }else{
                         $_SESSION['LOGIN_ERROR'] = 1;
-                        header('Location:index.php');
+                        header("Location: $base_url");
+                        echo 'login_bed';
                     }
-
-
-
-                    if (!empty($email_data->num_rows)) {
-                        $_SESSION['EMAIL_ERROR'] = 0;
-
-                        $pass_tmp = md5($pass);
-
-                        $email_arr = mysqli_fetch_assoc($email_data);
-
-                        if ($pass_tmp == $email_arr['password']) {
-                            $_SESSION['PASS_ERROR'] =  0;
-
-                        }else{
-                            $_SESSION['PASS_ERROR'] = 1;
-                            header('Location:index.php');
-                        }
-
-                    }else{
-                        $_SESSION['EMAIL_ERROR'] = 1;
-                        header('Location:index.php');
+                }
+            else if( $slug == 'lk'){
+                $check_role = $main->check_role($_SESSION['user']);
+                if (!empty($check_role) ){
+                    if ($check_role == 1){
+                        echo "Це адмін";
+                    }else if($check_role == 2){
+                        echo "Це менеджер";
+                    }else if ($check_role == 3){
+                        echo "Це клієнт";
                     }
                 }else{
-                    $_SESSION['ERROR_FIELD'] = 1;
+                    echo "Це директор";
                 }
+                $content = 'lk';
             }
+
             else{
                 $main_content = $main->findStractId($slug);
                 if (!empty($main_content)){

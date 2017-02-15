@@ -7,6 +7,8 @@
             echo $result_counter['counter'];
             echo "<br>";
             $ip = $_SERVER["REMOTE_ADDR"];
+            var_dump($ip);
+
             ?></p>
         <p>Останній візит <?php echo $lastVisit;?></p>
     </div>

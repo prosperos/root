@@ -1,20 +1,4 @@
-<div>
-    <p><a href="<?php echo $slug;?>&start=<?php echo 0;?>"><<</a></p>
-</div>
-<?php
 
-for ($i = 0; $i < $pagination[0]; $i++){
-    ?>
-    <div>
-        <p><a href="<?php echo $slug;?>&start=<?php echo  $i*$limit;?>&last=<?php echo $limit ;?>"><?php echo $i+1;?></a></p>
-    </div>
-    <?php
-    $count_i = $i*$limit;
-}
-?>
-<div>
-    <p><a href="<?php echo $slug;?>&start=<?php echo  $count_i;?>&last=<?php echo  $limit;?>">>>></a></p>
-</div>
 <?php
 while($all_pagination = mysqli_fetch_assoc($pagination[1])){
   ?>
@@ -26,3 +10,18 @@ while($all_pagination = mysqli_fetch_assoc($pagination[1])){
 
 ?>
 
+<ul class="pagination">
+    <li><a href="<?php echo $slug;?>&start=<?php echo 0;?>"><<</a></li>
+
+    <?php
+
+    for ($i = 0; $i < $pagination[0]; $i++){
+        ?>
+
+        <li><a href="<?php echo $slug;?>&start=<?php echo  $i*$limit;?>&last=<?php echo $limit ;?>"><?php echo $i+1;?></a></li>
+        <?php
+        $count_i = $i*$limit;
+    }
+    ?>
+    <li><a href="<?php echo $slug;?>&start=<?php echo  $count_i;?>&last=<?php echo  $limit;?>">>></a></li>
+</ul>

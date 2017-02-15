@@ -1,4 +1,4 @@
-<form action="login" method="post">
+<form action="log_in" method="post">
         <p>Электронная почта</p>
             <input name="email" type="text" placeholder="Введите ваш e-mail">
         <p>Пароль</p>

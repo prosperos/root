@@ -94,9 +94,16 @@ class MainClass{
         $query = mysqli_query($this->conn, "INSERT INTO `users`(`login`, `email`, `password`) VALUES ('$login', '$email', '$pass')" );
         return $query;
     }
-    function loginUser(){
-        $name_data = mysqli_query($this->conn, "SELECT name FROM users WHERE name = '$login' AND email = '$email'");
+    function loginUser($login, $pass){
+        $pass = md5($pass);
+        $name_data = mysqli_query($this->conn, "SELECT * FROM users WHERE login = '$login' AND password = '$pass'");
         return $name_data;
+    }
+    function check_role($login){
+        $name_data = mysqli_query($this->conn, "SELECT * FROM users WHERE login = '$login'");
+        $role = mysqli_fetch_assoc($name_data);
+        return $role['role'];
+
     }
 
 }

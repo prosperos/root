@@ -48,6 +48,8 @@
                     <?php
                 }
                 ?>
+
+                <p><a href="login">Вхід</a></p>
             </div>
         </div>
 
