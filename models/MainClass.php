@@ -75,11 +75,33 @@ class MainClass{
     function countViewsArticle($slug){
         if (!empty($slug)) {
             $result = mysqli_query ($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
-            $update = mysqli_query ($this->conn, "UPDATE categories_item SET counter=counter+1 WHERE content_full_slug = '$slug'");
+            //$update = mysqli_query ($this->conn, "UPDATE categories_item SET counter=counter+1 WHERE content_full_slug = '$slug'");
             $result_query = mysqli_query($this->conn, "SELECT * FROM categories_item WHERE content_full_slug = '$slug'");
             return $result_query;
         }
     }
+
+    function updateViews($ip, $id_article, $counter){
+        $select = mysqli_query($this->conn, "SELECT * FROM stut_id WHERE id_article = $id_article");
+        $result_select = mysqli_fetch_assoc($select);
+        $datefrombd = $result_select['data_visit'];
+        $now = date('Y-m-d');
+        $datefrombd =  date('Y-m-d',strtotime($datefrombd));
+        var_dump($datefrombd);
+        var_dump($now);
+            if ($now != $datefrombd){
+                $result = mysqli_query($this->conn, "INSERT INTO `stut_id`(ip, id_article) VALUES ( '$ip' , $id_article)");
+
+                $my_counter = $counter+1;
+                $result2 = mysqli_query($this->conn, "UPDATE categories_item SET counter = $my_counter WHERE id = $id_article ");
+
+            }else{
+                $time = date("Y-m-d H:i:s");
+                $result2 = mysqli_query($this->conn, "UPDATE stut_id SET `data_visit` = '$time WHERE id = $id_article");
+            }
+        return $result2;
+    }
+
     function pagination($limit, $this_page_first_result){
         $result = mysqli_query($this->conn, "SELECT id FROM categories_item" );
         $pages = $result->num_rows / $limit;

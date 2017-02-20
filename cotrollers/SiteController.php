@@ -50,6 +50,9 @@ if (!empty($slug)){
             }
             else if (!empty($my_article)){
                 $main_content = $my_article;
+
+                $ip = $_SERVER["REMOTE_ADDR"];
+                $count_my_article = $main->updateViews($ip, $my_article['id'],$my_article['counter']) ;
                 $content = 'article';
 
 
