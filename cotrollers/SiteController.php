@@ -7,6 +7,9 @@ require 'helpers/ClientClass.php';
 require 'cotrollers/constan.php';
 require 'models/FindClass.php';
 
+require 'helpers/coment.php';
+
+
 $base_url = 'http://localhost/new/';
 $slug = $_SERVER['QUERY_STRING'];
 
@@ -34,15 +37,21 @@ $countViewsArticle = $main->countViewsArticle($slug);
 $limit = 2;//pagination
 
 
+
 if (!empty($slug)){
     $id = $main->categoruId($slug);//іd категорії
+
+
+
+
     include 'helpers/pagination.php';
+
         if (!empty($id)){
             $main_content = $main->categoruArticle($id);
             if($slug == 'vse_predmety'){
                 $main_content = $main->showArticles();
-                include 'helpers/pagination.php';
             }
+
         }else{
             $my_article = $main->findArticleSlug($slug);
             if ($slug == ABOUT_US){
@@ -50,12 +59,12 @@ if (!empty($slug)){
             }
             else if (!empty($my_article)){
                 $main_content = $my_article;
-
                 $ip = $_SERVER["REMOTE_ADDR"];
+
+                $show_coments = $main->show_comments($my_article['id']);// Показує коментарі до статті
+
                 $count_my_article = $main->updateViews($ip, $my_article['id'],$my_article['counter']) ;
                 $content = 'article';
-
-
             }
 //            else if (is_numeric($slug) == true){
 //                $main_content = $main->findArticle($slug);
@@ -69,7 +78,7 @@ if (!empty($slug)){
 
             else if ( $slug == 'blog' ) {
                 $main_content = $main->showArticles();
-                include 'helpers/pagination.php';
+
             }
             else if ($slug == 'news' || $slug == 'free_video' || $slug == 'tips' || $slug == 'raznoe'){
                 $main_content = $main->findNewsArticle($slug);
@@ -149,22 +158,20 @@ if (!empty($slug)){
                 }
                 $content = 'lk';
             }
-
+            else if( $slug == 'add_coments'){
+                $add_coments = $main->insert_coments($id_artile, $name, $mail, $text);
+                header("Location: $base_url"."$slug_artile");
+            }
             else{
                 $main_content = $main->findStractId($slug);
                 if (!empty($main_content)){
                     $content = 'page';
                 }else{
-                    //header(Location: $content = '404');
                     $content = '404';
                 }
             }
         }
-
-
 }else{
     $main_content = $main->showArticles();
-
-    include 'helpers/pagination.php';
 }
 ?>
